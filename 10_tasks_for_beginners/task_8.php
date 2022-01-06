@@ -30,48 +30,47 @@
                             <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
                         </div>
                     </div>
-                    <?php
-                    $users = [];
-
-                    try {
-                        $db = new PDO('mysql:host=mysql;dbname=marlin;charset=utf8','root','3312', [PDO::ERRMODE_EXCEPTION => true]);
-
-                        $q_results = $db->query("SELECT * FROM `users`");
-
-                        while ($row = $q_results->fetch(PDO::FETCH_ASSOC)) {
-                            $q_contacts_results = $db->query("SELECT * FROM `users_contacts` WHERE `user_id` = " . (int)$row['id']);
-                            while ($contacts_row = $q_contacts_results->fetch(PDO::FETCH_ASSOC))
-                                $row['contacts'][$contacts_row['type']] = $contacts_row['value'];
-
-                            $users[] = $row;
-                        }
-
-                        $db = null;
-                        $q_results = null;
-                    } catch (PDOException $e) {
-                        print "Error!: " . $e->getMessage() . "<br/>";
-                        die();
-                    }
-                    ?>
                     <div class="panel-container show">
                         <div class="panel-content">
-                            <div class="d-flex flex-wrap demo demo-h-spacing mt-3 mb-3">
-                            <?php foreach ($users as $user) { ?>
-                            <div class="<?=($user['status'] == 'banned') ? 'banned' : ''?> rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-                                <img src="img/demo/authors/<?=$user['icon']?>" alt="<?=$user['name']?>" class="img-thumbnail img-responsive rounded-circle" style="width:5rem; height: 5rem;">
-                                <div class="ml-2 mr-3">
-                                    <h5 class="m-0">
-                                        <?=$user['name']?> (<?=$user['position']?>)
-                                        <small class="m-0 fw-300">
-                                            <?=$user['department']?>
-                                        </small>
-                                    </h5>
-                                    <a href="https://twitter.com/<?=$user['contacts']['twitter']?>" class="text-info fs-sm" target="_blank"><?=$user['contacts']['twitter']?></a> -
-                                    <a href="https://wrapbootstrap.com/user/<?=$user['contacts']['wrapbootstrap']?>" class="text-info fs-sm" target="_blank" title="Contact <?=$user['short_name']?>"><i class="fal fa-envelope"></i></a>
-                                </div>
+                            <h5 class="frame-heading">
+                                Обычная таблица
+                            </h5>
+                            <div class="frame-wrap">
+                                <table class="table m-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <?php
+                                    $db = new PDO('mysql:host=mysql;dbname=marlin;charset=utf8','root','3312', [PDO::ERRMODE_EXCEPTION => true]);
+
+                                    $sql = "SELECT * FROM task_8_users";
+                                    $q = $db->prepare($sql);
+                                    $q->execute();
+                                    $users = $q->fetchAll(PDO::FETCH_ASSOC);
+                                    ?>
+                                    <tbody>
+                                        <?php foreach ($users as $user){ ?>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td><?=$user['fname']?></td>
+                                            <td><?=$user['lname']?></td>
+                                            <td>@<?=$user['uname']?></td>
+                                            <td>
+                                                <a href="show.php?id=<?=$user['id']?>" class="btn btn-info">Редактировать</a>
+                                                <a href="edit.php?id=<?=$user['id']?>" class="btn btn-warning">Изменить</a>
+                                                <a href="delete.php?id=<?=$user['id']?>" class="btn btn-danger">Удалить</a>
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
                             </div>
-                            <?php } ?>
-                        </div>
                         </div>
                     </div>
                 </div>
