@@ -20,10 +20,17 @@ if(!empty($_POST['text'])) {
         $q->bindParam(':lname', $text);
         $q->bindParam(':uname', $text);
         $q->execute();
+
+        $_SESSION['msg']['code'] = 'success';
+        $_SESSION['msg']['text'] = 'Запись добавлена';
     } else {
-        $_SESSION['is_exists'] = true;
+        $_SESSION['msg']['code'] = 'danger';
+        $_SESSION['msg']['text'] = 'Запись уже существует';
     }
     $q = null;
+} else {
+    $_SESSION['msg']['code'] = 'warning';
+    $_SESSION['msg']['text'] = 'Нужно ввести данные';
 }
 
 $db = null;

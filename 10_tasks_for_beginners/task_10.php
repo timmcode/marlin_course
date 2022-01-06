@@ -39,9 +39,9 @@ $url = 'task_10_save.php';
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <?php if($_SESSION['is_exists']){ ?>
-                                    <div class="alert alert-danger fade show" role="alert">
-                                        You should check in on some of those fields below.
+                                    <?php if(isset($_SESSION['msg']['code'])){ ?>
+                                    <div class="alert alert-<?=$_SESSION['msg']['code']?> fade show" role="alert">
+                                        <?=$_SESSION['msg']['text']?>
                                     </div>
                                     <?php } ?>
                                     <form action="<?=$url?>" method="POST">
@@ -69,7 +69,7 @@ $url = 'task_10_save.php';
     </body>
 </html>
 <?php
-if(isset($_SESSION['is_exists'])) {
-    unset($_SESSION['is_exists']);
+if(isset($_SESSION['msg'])) {
+    unset($_SESSION['msg']);
 }
 ?>
