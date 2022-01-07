@@ -1,1 +1,4 @@
 .idea
+
+10_tasks_for_beginners/gallery/*
+!10_tasks_for_beginners/gallery/index.html
