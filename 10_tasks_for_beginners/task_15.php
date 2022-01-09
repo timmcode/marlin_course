@@ -10,7 +10,7 @@ $images_table = 'task_15_images';
 <head>
     <meta charset="utf-8">
     <title>
-        Задание 15 1 - Загрузка изображений
+        Задание 15 - Загрузка изображений
     </title>
     <meta name="description" content="Chartist.html">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,7 +31,7 @@ $images_table = 'task_15_images';
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Задание 15 1 - Загрузка изображений
+                        Задание 15 - Загрузка изображений
                     </h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -50,8 +50,16 @@ $images_table = 'task_15_images';
 
                                 <form action="<?=$form_action_add_file?>" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Image</label>
-                                        <input type="file" id="simpleinput" class="form-control" name="image">
+                                        <label class="form-label" for="simpleinput_1">Image</label>
+                                        <input type="file" id="simpleinput_1" class="form-control" name="image[]">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput_2">Image</label>
+                                        <input type="file" id="simpleinput_2" class="form-control" name="image[]">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput_3">Image</label>
+                                        <input type="file" id="simpleinput_3" class="form-control" name="image[]">
                                     </div>
                                     <button class="btn btn-success mt-3">Submit</button>
                                 </form>

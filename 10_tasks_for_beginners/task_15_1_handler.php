@@ -27,6 +27,8 @@ function deleteImage()
 
         if(!is_file($image_path_full))
             $errors[] = 'Файл изображения не найден';
+        else
+            unlink($image_path_full);
 
         $sql = "DELETE FROM `" . $images_table . "` WHERE `id` = '" . $image_id . "'";
         $q = $db->prepare($sql);
