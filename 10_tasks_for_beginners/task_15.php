@@ -50,8 +50,8 @@ $images_table = 'task_15_images';
 
                                 <form action="<?=$form_action_add_file?>" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <label class="form-label" for="simpleinput_1">Image</label>
-                                        <input type="file" id="simpleinput_1" class="form-control" name="image[]">
+                                        <label class="form-label" for="simpleinput_1">Image Multiupload</label>
+                                        <input enctype="multipart/form-data" type="file" id="simpleinput_1" class="form-control" name="image[]" multiple >
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput_2">Image</label>
