@@ -8,6 +8,7 @@ include 'Request.php';
 include 'DB.php';
 include 'User.php';
 include 'Load.php';
+include 'View.php';
 
 use App\Config;
 use App\User;
@@ -24,6 +25,9 @@ class App
     private $url;
     private $request;
     private $load;
+    private $view;
+
+    public static $DS = DIRECTORY_SEPARATOR;
 
     function __construct()
     {
@@ -33,11 +37,14 @@ class App
         spl_autoload_register();
 
         $this->config = Config::getInstance();
+        $this->config->setProperty('root_path', rtrim(__DIR__, 'app'));
+
         $this->request = new Request($this);
         $this->url = new Url($this);
         $this->db = new DB($this);
         $this->user = new User($this);
         $this->load = new Load($this);
+        $this->view = new View();
     }
 
     public function run()

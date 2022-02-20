@@ -12,12 +12,12 @@ class Config{
         return self::$instance ?? (self::$instance = new self);
     }
 
-    public static function setProperty($var)
+    public static function setProperty($property, $value)
     {
-        self::$property = $var;
+        self::$property = $value;
     }
 
-    public static function getProperty()
+    public static function getProperty($property)
     {
         return self::$property;
     }

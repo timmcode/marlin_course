@@ -17,6 +17,6 @@ class Url
 
     public function make(array $params, bool $absolute = true)
     {
-        return (($absolute) ? $this->base : '') . '?' . http_build_query($params);
+        return (($absolute) ? $this->base : '') . '?' . urldecode(http_build_query($params));
     }
 }
