@@ -2,18 +2,8 @@
 
 namespace App\Controllers;
 
-use \App\Config;
-use App\DB;
-
 class AuthController
 {
-//    private $app;
-//
-//    public function __construct($app)
-//    {
-//        $this->app = $app;
-//    }
-
     public function login()
     {
         $data = [
