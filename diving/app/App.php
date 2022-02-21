@@ -26,6 +26,7 @@ class App
     private $request;
     private $load;
     private $view;
+    private static $flash;
 
     function __construct()
     {

@@ -16,7 +16,7 @@ class AuthController
     public function login()
     {
         $data = [
-            'href_action' => \App\Url::make(['route' => 'auth/login']),
+            'href_login' => \App\Url::make(['route' => 'auth/login']),
             'href_register' => \App\Url::make(['route' => 'auth/register'])
         ];
 
@@ -25,6 +25,8 @@ class AuthController
 
     public function register()
     {
+        if(!empty(\App\Request::$post['']))
+
         $data = [
             'href_login' => \App\Url::make(['route' => 'auth/login']),
             'href_register' => \App\Url::make(['route' => 'auth/register'])
