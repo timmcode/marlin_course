@@ -7,6 +7,7 @@ class Request
     public static $get;
     public static $post;
     public static $session;
+    public static $files;
 
     public function __construct()
     {

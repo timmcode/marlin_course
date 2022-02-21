@@ -9,6 +9,7 @@ include 'DB.php';
 include 'User.php';
 include 'Load.php';
 include 'View.php';
+include 'Flash.php';
 
 use App\Config;
 use App\User;
@@ -26,7 +27,6 @@ class App
     private $request;
     private $load;
     private $view;
-    private static $flash;
 
     function __construct()
     {
@@ -49,12 +49,12 @@ class App
     public function run()
     {
         if(!$this->user->isLogged())
-            if($this->request->get['route'] !== 'auth/login' && $this->request->get['route'] !== 'auth/register')
+            if(!isset(\App\Request::$get['route']) || (\App\Request::$get['route'] !== 'auth/login' && \App\Request::$get['route'] !== 'auth/register'))
                 redirect($this->url->make(['route' => 'auth/login']));
 
-        if(empty($this->request->get['route']))
+        if(empty(\App\Request::$get['route']))
             $this->request->get['route'] = 'home';
 
-        $this->load->controller($this->request->get['route']);
+        $this->load->controller(\App\Request::$get['route']);
     }
 }

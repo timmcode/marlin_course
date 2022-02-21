@@ -33,9 +33,11 @@
             </a>
         </div>
         <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
+            <?php if($flash){ ?>
             <div class="alert alert-success">
-                Регистрация успешна
+                <?=$flash?>
             </div>
+            <?php } ?>
             <form action="<?=$href_login?>">
                 <div class="form-group">
                     <label class="form-label" for="username">Email</label>
