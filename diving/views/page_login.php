@@ -38,18 +38,18 @@
                 <?=$flash?>
             </div>
             <?php } ?>
-            <form action="<?=$href_login?>">
+            <form action="<?=$href_login?>" method="post">
                 <div class="form-group">
                     <label class="form-label" for="username">Email</label>
-                    <input type="email" id="username" class="form-control" placeholder="Эл. адрес" value="">
+                    <input name="email" type="email" id="username" class="form-control" placeholder="Эл. адрес" value="">
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="password">Пароль</label>
-                    <input type="password" id="password" class="form-control" placeholder="" >
+                    <input name="password" type="password" id="password" class="form-control" placeholder="" >
                 </div>
                 <div class="form-group text-left">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="rememberme">
+                        <input name=remember_me"" type="checkbox" class="custom-control-input" id="rememberme">
                         <label class="custom-control-label" for="rememberme">Запомнить меня</label>
                     </div>
                 </div>

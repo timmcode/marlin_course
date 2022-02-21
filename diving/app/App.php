@@ -21,12 +21,7 @@ use App\Load;
 class App
 {
     private $config;
-    private $user;
-    private $db;
-    private $url;
-    private $request;
     private $load;
-    private $view;
 
     function __construct()
     {
@@ -38,22 +33,21 @@ class App
         $this->config = Config::getInstance();
         $this->config->setProperty('root_path', rtrim(__DIR__, 'app'));
 
-        $this->request = new Request($this);
-        $this->url = new Url($this);
-        $this->db = new DB($this);
-        $this->user = new User($this);
+        new DB();
+        new Request();
+        new View();
+
         $this->load = new Load($this);
-        $this->view = new View();
     }
 
     public function run()
     {
-        if(!$this->user->isLogged())
+        if(!\App\User::isLogged())
             if(!isset(\App\Request::$get['route']) || (\App\Request::$get['route'] !== 'auth/login' && \App\Request::$get['route'] !== 'auth/register'))
-                redirect($this->url->make(['route' => 'auth/login']));
+                redirect(\App\Url::make(['route' => 'auth/login']));
 
         if(empty(\App\Request::$get['route']))
-            $this->request->get['route'] = 'home';
+            \App\Request::$get['route'] = 'home';
 
         $this->load->controller(\App\Request::$get['route']);
     }

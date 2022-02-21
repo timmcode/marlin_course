@@ -6,6 +6,23 @@ class AuthController
 {
     public function login()
     {
+        $data = [];
+
+        if(!empty(\App\Request::$post['email']) && !empty(\App\Request::$post['password'])){
+            $result = \App\User::getUserByEmail(\App\Request::$post['email']);
+            if(!empty($result)){
+                $result = array_shift($result);
+                if(password_verify(\App\Request::$post['password'], $result['password'])){
+                    $_SESSION['user'] = $result;
+                    redirect(\App\Url::make());
+                } else {
+                    \App\Flash::set('Неверный пароль');
+                }
+            } else {
+                \App\Flash::set('Пользователь не найден');
+            }
+        }
+
         $data = [
             'href_login' => \App\Url::make(['route' => 'auth/login']),
             'href_register' => \App\Url::make(['route' => 'auth/register']),
@@ -20,11 +37,12 @@ class AuthController
         $data = [];
 
         if(!empty(\App\Request::$post['email']) && !empty(\App\Request::$post['password'])){
-            $result = \App\DB::select('SELECT * FROM `users` WHERE `email` = ?',[\App\Request::$post['email']]);
+            $result = \App\User::getUserByEmail(\App\Request::$post['email']);
             if(empty($result)){
-                \App\DB::insert('INSERT INTO `users` SET `email` = ?, `password` = ?',[\App\Request::$post['email'], password_hash(\App\Request::$post['password'], PASSWORD_DEFAULT)]);
-                \App\Flash::set('Пользователь зарегистрирован');
-                redirect(\App\Url::make(['route' => 'auth/login']));
+                if(\App\User::addNewUser(\App\Request::$post['email'], \App\Request::$post['password'])){
+                    \App\Flash::set('Пользователь зарегистрирован');
+                    redirect(\App\Url::make(['route' => 'auth/login']));
+                }
             } else {
                 \App\Flash::set('<strong>Уведомление!</strong> Этот эл. адрес уже занят другим пользователем.');
             }

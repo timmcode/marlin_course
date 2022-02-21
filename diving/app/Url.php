@@ -15,7 +15,7 @@ class Url
         $_SERVER['SCRIPT_NAME']);
     }
 
-    public static function make(array $params, bool $absolute = true)
+    public static function make(array $params = [], bool $absolute = true)
     {
         return (($absolute) ? self::$base : '') . '?' . urldecode(http_build_query($params));
     }
