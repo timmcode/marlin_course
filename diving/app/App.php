@@ -36,6 +36,7 @@ class App
         new DB();
         new Request();
         new View();
+        new Url();
 
         $this->load = new Load($this);
     }

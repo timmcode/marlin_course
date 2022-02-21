@@ -17,6 +17,8 @@ class Url
 
     public static function make(array $params = [], bool $absolute = true)
     {
-        return (($absolute) ? self::$base : '') . '?' . urldecode(http_build_query($params));
+        $url[] = ($absolute) ? self::$base : '';
+        $url[] = (!empty($params)) ? '?' . urldecode(http_build_query($params)) : '';
+        return join('', $url);
     }
 }
