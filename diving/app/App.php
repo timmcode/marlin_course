@@ -27,13 +27,11 @@ class App
     private $load;
     private $view;
 
-    public static $DS = DIRECTORY_SEPARATOR;
-
     function __construct()
     {
         session_start();
 
-        spl_autoload_extensions(".php"); // comma-separated list
+        spl_autoload_extensions(".php");
         spl_autoload_register();
 
         $this->config = Config::getInstance();
@@ -49,9 +47,13 @@ class App
 
     public function run()
     {
-        if(!$this->user->isLogged() && $this->request->get['route'] !== 'auth/login')
-            redirect($this->url->make(['route' => 'auth/login']));
-        else
-            $this->load->controller($this->request->get['route']);
+        if(!$this->user->isLogged())
+            if($this->request->get['route'] !== 'auth/login' && $this->request->get['route'] !== 'auth/register')
+                redirect($this->url->make(['route' => 'auth/login']));
+
+        if(empty($this->request->get['route']))
+            $this->request->get['route'] = 'home';
+
+        $this->load->controller($this->request->get['route']);
     }
 }

@@ -2,6 +2,6 @@
 
 namespace App\Controllers;
 
-class Home{
+class HomeController{
 
 }

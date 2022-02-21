@@ -36,7 +36,7 @@
             <div class="alert alert-success">
                 Регистрация успешна
             </div>
-            <form action="<?=$action?>">
+            <form action="<?=$href_login?>">
                 <div class="form-group">
                     <label class="form-label" for="username">Email</label>
                     <input type="email" id="username" class="form-control" placeholder="Эл. адрес" value="">
@@ -55,7 +55,7 @@
             </form>
         </div>
         <div class="blankpage-footer text-center">
-            Нет аккаунта? <a href="page_register.html"><strong>Зарегистрироваться</strong>
+            Нет аккаунта? <a href="<?=$href_register?>"><strong>Зарегистрироваться</strong>
         </div>
     </div>
     <video poster="assets/img/backgrounds/clouds.png" id="bgvid" playsinline autoplay muted loop>
