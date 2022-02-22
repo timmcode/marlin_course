@@ -5,6 +5,6 @@ namespace App\Controllers;
 class HomeController{
     public function index()
     {
-        echo 'is_home';
+        redirect(\App\Url::make(['route' => 'user/list']));
     }
 }

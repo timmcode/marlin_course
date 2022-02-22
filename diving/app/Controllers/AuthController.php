@@ -14,7 +14,7 @@ class AuthController
         if(!empty(\App\Request::$post['email']) && !empty(\App\Request::$post['password'])){
             $result = \App\User::getUserByEmail(\App\Request::$post['email']);
             if(empty($result)){
-                if(\App\User::addNewUser(\App\Request::$post['email'], \App\Request::$post['password'])){
+                if(\App\User::addUser(['email' => \App\Request::$post['email'], 'password' => \App\Request::$post['password']])){
                     \App\Flash::set('Пользователь зарегистрирован');
                     redirect(\App\Url::make(['route' => 'auth/login']));
                 }
@@ -40,7 +40,6 @@ class AuthController
         if(!empty(\App\Request::$post['email']) && !empty(\App\Request::$post['password'])){
             $result = \App\User::getUserByEmail(\App\Request::$post['email']);
             if(!empty($result)){
-                $result = array_shift($result);
                 if(\App\User::verifyUserPasswordHash(\App\Request::$post['password'], $result['password'])){
                     $_SESSION['user'] = $result;
                     redirect(\App\Url::make());
